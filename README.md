@@ -3,10 +3,10 @@
 A customizable night light component for React with an interactive pull-cord mechanism.
 
 [![npm version](https://img.shields.io/npm/v/react-night-light.svg)](https://www.npmjs.com/package/react-night-light)
-<a href="https://zigliad.github.io/react-night-light/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/demo-live-brightgreen.svg" alt="Demo" /></a>
+[![Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://zigliad.github.io/react-night-light/)
 [![GitHub license](https://img.shields.io/github/license/zigliad/react-night-light.svg)](https://github.com/zigliad/react-night-light/blob/main/LICENSE)
 
-## <a href="https://zigliad.github.io/react-night-light/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+## [Live Demo](https://zigliad.github.io/react-night-light/)
 
 <p>
   <img src="https://github.com/zigliad/react-night-light/blob/main/light-bulb-demo.gif?raw=true" alt="React Night Light Demo" width="200" />

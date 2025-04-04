@@ -1,6 +1,6 @@
 {
 	"name": "react-night-light",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A React component that simulates a night light with pull-to-toggle functionality",
 	"private": false,
 	"main": "dist/index.umd.js",
