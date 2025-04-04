@@ -2,11 +2,15 @@
 
 A customizable night light component for React applications. It features a realistic SVG light bulb with a pull-down wire handle to toggle the light state, complete with physics-based animations for a natural feel.
 
-<!-- Add a screenshot or GIF of the component here after publishing -->
+[![npm version](https://img.shields.io/npm/v/react-night-light.svg)](https://www.npmjs.com/package/react-night-light)
+[![Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://zigliad.github.io/react-night-light/)
+[![GitHub license](https://img.shields.io/github/license/zigliad/react-night-light.svg)](https://github.com/zigliad/react-night-light/blob/main/LICENSE)
 
 ## Demo
 
-The interactive demo showcases all the main features of the Night Light component:
+Try the interactive demo: **[https://zigliad.github.io/react-night-light/](https://zigliad.github.io/react-night-light/)**
+
+The demo showcases all the main features of the Night Light component:
 
 -   **Interactive Pull Mechanism** - Pull on the cord to toggle the light on/off
 -   **Real-time Customization** - Modify parameters like wire color, pull distance and length
@@ -16,7 +20,7 @@ The interactive demo showcases all the main features of the Night Light componen
 To run the demo locally:
 
 ```bash
-git clone https://github.com/liadzigdon/react-night-light.git
+git clone https://github.com/zigliad/react-night-light.git
 cd react-night-light
 npm install
 npm run dev
@@ -59,7 +63,7 @@ const MyComponent = () => {
 				isOn={isLightOn}
 				onToggle={(newState) => setIsLightOn(newState)}
 				maxPullDistance={70}
-				glowColor="rgba(255, 220, 120, 0.5)"
+				wireColor="rgba(255, 220, 120, 0.5)"
 				width="300px"
 				height="400px"
 			/>
@@ -129,4 +133,4 @@ MIT
 
 ## Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests.
+Contributions are welcome! Feel free to open issues or submit pull requests to the [GitHub repository](https://github.com/zigliad/react-night-light).
