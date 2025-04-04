@@ -12,8 +12,6 @@ export type Props = {
 	onToggle?: (state: boolean) => void;
 	wireColor?: string;
 	maxPullDistance?: number;
-	width?: number | string;
-	height?: number | string;
 	initialWireLength?: number; // New prop for initial wire length
 	className?: string; // Added className prop
 };
@@ -22,10 +20,8 @@ export const NightLight: React.FC<Props> = ({
 	isOn: controlledIsOn,
 	onToggle,
 	wireColor = "#888",
-	maxPullDistance = 60, // Maximum pull distance
-	width = "150px", // Default width that fits the components
-	height = "auto", // Height will be determined by content
-	initialWireLength = 15, // Default initial wire length
+	maxPullDistance = 90, // Maximum pull distance
+	initialWireLength = 30, // Default initial wire length
 	className = "", // Default className is empty string
 }) => {
 	const [internalState, setInternalState] = useState(false);
@@ -38,6 +34,8 @@ export const NightLight: React.FC<Props> = ({
 	const handleRef = useRef<HTMLDivElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const threshold = maxPullDistance * 0.6; // Threshold to trigger toggle
+	// Track if we're interacting with the handle specifically
+	const isHandleInteraction = useRef(false);
 
 	// Spring for wire and handle animation
 	const [{ y }, api] = useSpring(() => ({
@@ -55,7 +53,6 @@ export const NightLight: React.FC<Props> = ({
 
 	// Spring for background color
 	const backgroundSpring = useSpring({
-		// backgroundColor: isOn ? "#f9f9f5" : "#141414",
 		config: { mass: 1, tension: 120, friction: 14 },
 	});
 
@@ -84,13 +81,21 @@ export const NightLight: React.FC<Props> = ({
 	// Handle starting the drag
 	const handleStart = useCallback(
 		(e: React.MouseEvent | React.TouchEvent) => {
-			e.preventDefault();
-			isDragging.current = true;
-
-			// Record the starting position
+			// Only start dragging if we're touching the handle
 			if ("touches" in e) {
-				startY.current = e.touches[0].clientY;
+				const target = e.target as HTMLElement;
+				if (handleRef.current && handleRef.current.contains(target)) {
+					// This is a handle interaction - we should prevent default
+					e.preventDefault();
+					isDragging.current = true;
+					isHandleInteraction.current = true;
+					startY.current = e.touches[0].clientY;
+				}
 			} else {
+				// For mouse events, always prevent default
+				e.preventDefault();
+				isDragging.current = true;
+				isHandleInteraction.current = true;
 				startY.current = e.clientY;
 			}
 		},
@@ -128,8 +133,11 @@ export const NightLight: React.FC<Props> = ({
 	// Handle touch move for mobile
 	const handleTouchMove = useCallback(
 		(e: TouchEvent) => {
-			e.preventDefault();
-			handleMove(e.touches[0].clientY);
+			// Only prevent default if this is a handle interaction
+			if (isDragging.current && isHandleInteraction.current) {
+				e.preventDefault();
+				handleMove(e.touches[0].clientY);
+			}
 		},
 		[handleMove]
 	);
@@ -138,6 +146,7 @@ export const NightLight: React.FC<Props> = ({
 	const handleEnd = useCallback(() => {
 		if (!isDragging.current) return;
 		isDragging.current = false;
+		isHandleInteraction.current = false;
 
 		// Clear any pending timeouts
 		clearAnimationTimeout();
@@ -221,7 +230,7 @@ export const NightLight: React.FC<Props> = ({
 		window.addEventListener("mousemove", handleGlobalMouseMove);
 		window.addEventListener("mouseup", handleGlobalMouseUp);
 		window.addEventListener("touchmove", handleTouchMove, {
-			passive: false,
+			passive: false, // Need non-passive to be able to preventDefault only when needed
 		});
 		window.addEventListener("touchend", handleEnd);
 		window.addEventListener("mouseleave", handleMouseLeave);
@@ -254,8 +263,8 @@ export const NightLight: React.FC<Props> = ({
 			className={className}
 			style={{
 				...backgroundSpring,
-				width, // Use provided width or default to 150px
-				height: height === "auto" ? `${totalMinHeight}px` : height,
+				width: "150px", // Default width that fits the components
+				height: `${totalMinHeight}px`,
 				position: "relative",
 				overflow: "visible", // Allow handle to extend beyond container
 				display: "flex",
@@ -358,7 +367,7 @@ export const NightLight: React.FC<Props> = ({
 						alignItems: "flex-start", // Align to top to connect with wire
 						cursor: "grab",
 						zIndex: 10,
-						touchAction: "none",
+						touchAction: "none", // Use none specifically for the handle to prevent scrolling when interacting with it
 						// Connect handle to wire
 						marginTop: 0,
 					}}

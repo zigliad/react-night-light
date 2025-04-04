@@ -22,20 +22,20 @@ const App = () => {
 				position: "relative",
 				width: "100%",
 				minHeight: "100vh",
-				overflowX: "hidden",
-				overflowY: "auto",
 				...springProps,
 			}}
 		>
 			{/* Night Light fixed at the top */}
 			<div className="fixed-light-container">
-				<NightLight
-					isOn={isOn}
-					onToggle={setIsOn}
-					maxPullDistance={maxPullDistance}
-					initialWireLength={initialWireLength}
-					wireColor={wireColor}
-				/>
+				<div className="night-light-wrapper">
+					<NightLight
+						isOn={isOn}
+						onToggle={setIsOn}
+						maxPullDistance={maxPullDistance}
+						initialWireLength={initialWireLength}
+						wireColor={wireColor}
+					/>
+				</div>
 			</div>
 
 			<div className="demo-container">
@@ -247,6 +247,25 @@ function MyComponent() {
 
 			<style>
 				{`
+					html, body {
+						height: 100%;
+						margin: 0;
+						padding: 0;
+						-webkit-overflow-scrolling: touch;
+					}
+
+					#root {
+						min-height: 100%;
+						position: relative;
+					}
+
+					.night-light-wrapper {
+						height: 250px;
+						width: 150px;
+						pointer-events: auto;
+						position: relative;
+					}
+
 					.fixed-light-container {
 						position: fixed;
 						top: 0;
@@ -257,7 +276,7 @@ function MyComponent() {
 						display: flex;
 						justify-content: center;
 						pointer-events: none;
-						transform: translateZ(0); /* Force hardware acceleration */
+						transform: translateZ(0);
 					}
 
 					.fixed-light-container > div {
@@ -271,9 +290,11 @@ function MyComponent() {
 						max-width: 1200px;
 						margin: 0 auto;
 						padding: 20px;
-						padding-top: 250px; /* Increased space for the fixed light */
+						padding-top: 250px;
 						box-sizing: border-box;
-						-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+						-webkit-overflow-scrolling: touch;
+						position: relative;
+						z-index: 1;
 					}
 					
 					.demo-header {
@@ -522,6 +543,10 @@ function MyComponent() {
 						.fixed-light-container {
 							height: 180px;
 						}
+						
+						.night-light-wrapper {
+							height: 180px;
+						}
 
 						.demo-container {
 							padding-top: 180px;
@@ -537,6 +562,12 @@ function MyComponent() {
 						
 						.feature-card {
 							padding: 20px 15px;
+						}
+						
+						body, html {
+							height: 100%;
+							overflow-y: auto;
+							position: static;
 						}
 					}
 				`}
