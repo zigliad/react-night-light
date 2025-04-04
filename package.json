@@ -1,0 +1,61 @@
+{
+	"name": "react-night-light",
+	"version": "0.1.0",
+	"description": "A React component that simulates a night light with pull-to-toggle functionality",
+	"private": false,
+	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build && tsc --emitDeclarationOnly --outDir dist",
+		"prepublishOnly": "npm run build",
+		"preview": "vite preview"
+	},
+	"peerDependencies": {
+		"react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+		"react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
+		"framer-motion": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
+		"@react-spring/web": "^9.0.0"
+	},
+	"dependencies": {
+		"framer-motion": "^10.16.4",
+		"@react-spring/web": "^9.7.3"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.0",
+		"@types/react-dom": "^18.0.0",
+		"typescript": "^4.0.0",
+		"vite": "^4.0.0",
+		"@vitejs/plugin-react": "^4.0.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"keywords": [
+		"react",
+		"night-light",
+		"toggle",
+		"ui",
+		"component",
+		"animation",
+		"interactive",
+		"physics",
+		"pull-cord"
+	],
+	"author": "Liad Zigdon",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/liadzigdon/react-night-light.git"
+	},
+	"homepage": "https://github.com/liadzigdon/react-night-light#readme",
+	"bugs": {
+		"url": "https://github.com/liadzigdon/react-night-light/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
