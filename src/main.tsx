@@ -20,8 +20,10 @@ const App = () => {
 		<animated.div
 			style={{
 				position: "relative",
-				// height: "100vh",
-				width: "100vw",
+				width: "100%",
+				minHeight: "100vh",
+				overflowX: "hidden",
+				overflowY: "auto",
 				...springProps,
 			}}
 		>
@@ -255,6 +257,7 @@ function MyComponent() {
 						display: flex;
 						justify-content: center;
 						pointer-events: none;
+						transform: translateZ(0); /* Force hardware acceleration */
 					}
 
 					.fixed-light-container > div {
@@ -268,7 +271,9 @@ function MyComponent() {
 						max-width: 1200px;
 						margin: 0 auto;
 						padding: 20px;
-						padding-top: 200px; /* Space for the fixed light */
+						padding-top: 250px; /* Increased space for the fixed light */
+						box-sizing: border-box;
+						-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 					}
 					
 					.demo-header {
@@ -519,7 +524,19 @@ function MyComponent() {
 						}
 
 						.demo-container {
-							padding-top: 160px;
+							padding-top: 180px;
+							padding-left: 15px;
+							padding-right: 15px;
+						}
+						
+						pre {
+							max-width: 100%;
+							white-space: pre-wrap;
+							word-break: break-word;
+						}
+						
+						.feature-card {
+							padding: 20px 15px;
 						}
 					}
 				`}
