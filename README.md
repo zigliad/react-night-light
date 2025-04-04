@@ -16,6 +16,7 @@ The demo showcases all the main features of the Night Light component:
 -   **Real-time Customization** - Modify parameters like wire color, pull distance and length
 -   **Live Code Examples** - See the exact code needed to implement your customized version
 -   **Responsive Design** - Works on both desktop and mobile devices
+-   **Mobile-Friendly** - Smart touch handling prevents page scrolling only when interacting with the handle
 
 To run the demo locally:
 
@@ -29,13 +30,14 @@ npm run dev
 ## Features
 
 -   🌙 Realistic SVG light bulb design
--   🎚️ Interactive pull-down handle mechanism to toggle the light
+-   ⛓️ Interactive pull-down handle mechanism to toggle the light
 -   🌈 Customizable wire color and glow effects
 -   🔄 Controlled and uncontrolled component modes
 -   ✨ Physics-based spring animations for realistic wire movement
 -   🌟 Gentle background glow effect when light is on
 -   🔧 Configurable pull distance and bounce effect
 -   📱 Works on both desktop and touch devices
+-   📱 Smart touch handling - prevents page scrolling only when interacting with the handle
 
 ## Installation
 
@@ -64,8 +66,6 @@ const MyComponent = () => {
 				onToggle={(newState) => setIsLightOn(newState)}
 				maxPullDistance={70}
 				wireColor="rgba(255, 220, 120, 0.5)"
-				width="300px"
-				height="400px"
 			/>
 
 			<p>The light is currently {isLightOn ? "ON" : "OFF"}</p>
@@ -88,8 +88,6 @@ const MyComponent = () => {
 			{/* Uncontrolled mode */}
 			<NightLight
 				onToggle={(state) => console.log("Light is now:", state)}
-				width="300px"
-				height="400px"
 			/>
 		</div>
 	);
@@ -103,10 +101,8 @@ const MyComponent = () => {
 | `isOn`              | boolean                  | undefined | Controls the light state (if provided, component is in controlled mode) |
 | `onToggle`          | (state: boolean) => void | undefined | Callback function triggered when light state changes                    |
 | `wireColor`         | string                   | '#888'    | Color of the pull wire                                                  |
-| `maxPullDistance`   | number                   | 60        | Maximum distance (in pixels) the wire can be pulled down                |
-| `width`             | number \| string         | '150px'   | Width of the component                                                  |
-| `height`            | number \| string         | 'auto'    | Height of the component                                                 |
-| `initialWireLength` | number                   | 15        | Initial length of the wire in pixels                                    |
+| `maxPullDistance`   | number                   | 90        | Maximum distance (in pixels) the wire can be pulled down                |
+| `initialWireLength` | number                   | 30        | Initial length of the wire in pixels                                    |
 | `className`         | string                   | ''        | Additional CSS class name for styling                                   |
 
 ## How it Works
@@ -126,6 +122,15 @@ The component uses `@react-spring/web` to implement realistic motion physics:
 -   Proper velocity transfer on release
 -   Bounce effect that resembles a real wire/string being pulled
 -   Smooth transitions for the light bulb and background effects
+
+### Mobile Interaction
+
+The component uses smart touch event handling to ensure it works well on mobile devices:
+
+-   Page scrolling is only prevented when directly interacting with the pull handle
+-   Normal scrolling behavior is maintained for the rest of the page
+-   The pull handle uses `touchAction: "none"` to ensure precise control
+-   Touch events are intelligently managed to provide a natural feel on mobile
 
 ## License
 
