@@ -1,6 +1,12 @@
 import { animated, config, useSpring } from "@react-spring/web";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
+// Import SVG images to ensure they're properly included in builds
+// Using relative URLs that will work with the base path configuration
+const bulbOffSvg = "./images/bulb-off.svg";
+const bulbOnSvg = "./images/bulb-on.svg";
+const handleSvg = "./images/handle.svg";
+
 export type Props = {
 	isOn?: boolean;
 	onToggle?: (state: boolean) => void;
@@ -269,7 +275,7 @@ export const NightLight: React.FC<Props> = ({
 			>
 				{/* Off Bulb */}
 				<animated.img
-					src="/images/bulb-off.svg"
+					src={bulbOffSvg}
 					alt="Light bulb off"
 					style={{
 						...bulbOffSpring,
@@ -283,7 +289,7 @@ export const NightLight: React.FC<Props> = ({
 
 				{/* On Bulb */}
 				<animated.img
-					src="/images/bulb-on.svg"
+					src={bulbOnSvg}
 					alt="Light bulb on"
 					style={{
 						...bulbOnSpring,
@@ -372,7 +378,7 @@ export const NightLight: React.FC<Props> = ({
 						}}
 					/>
 					<img
-						src="/images/handle.svg"
+						src={handleSvg}
 						alt="Pull handle"
 						style={{
 							width: "100%",
