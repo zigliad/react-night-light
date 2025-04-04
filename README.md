@@ -3,10 +3,10 @@
 A customizable night light component for React with an interactive pull-cord mechanism.
 
 [![npm version](https://img.shields.io/npm/v/react-night-light.svg)](https://www.npmjs.com/package/react-night-light)
-[![Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://zigliad.github.io/react-night-light/)
+<a href="https://zigliad.github.io/react-night-light/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/demo-live-brightgreen.svg" alt="Demo" /></a>
 [![GitHub license](https://img.shields.io/github/license/zigliad/react-night-light.svg)](https://github.com/zigliad/react-night-light/blob/main/LICENSE)
 
-## [Live Demo](https://zigliad.github.io/react-night-light/)
+## <a href="https://zigliad.github.io/react-night-light/" target="_blank" rel="noopener noreferrer">Live Demo</a>
 
 <p>
   <img src="https://github.com/zigliad/react-night-light/blob/main/light-bulb-demo.gif?raw=true" alt="React Night Light Demo" width="200" />
@@ -38,17 +38,17 @@ import React, { useState } from "react";
 import { NightLight } from "react-night-light";
 
 const MyComponent = () => {
-	const [isLightOn, setIsLightOn] = useState(false);
+  const [isLightOn, setIsLightOn] = useState(false);
 
-	return (
-		<div>
-			<NightLight
-				isOn={isLightOn}
-				onToggle={(newState) => setIsLightOn(newState)}
-			/>
-			<p>The light is currently {isLightOn ? "ON" : "OFF"}</p>
-		</div>
-	);
+  return (
+    <div>
+      <NightLight
+        isOn={isLightOn}
+        onToggle={(newState) => setIsLightOn(newState)}
+      />
+      <p>The light is currently {isLightOn ? "ON" : "OFF"}</p>
+    </div>
+  );
 };
 ```
 
@@ -59,13 +59,13 @@ import React from "react";
 import { NightLight } from "react-night-light";
 
 const MyComponent = () => {
-	return (
-		<div>
-			<NightLight
-				onToggle={(state) => console.log("Light is now:", state)}
-			/>
-		</div>
-	);
+  return (
+    <div>
+      <NightLight
+        onToggle={(state) => console.log("Light is now:", state)}
+      />
+    </div>
+  );
 };
 ```
 
