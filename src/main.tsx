@@ -1,6 +1,6 @@
+import { animated, useSpring } from "@react-spring/web";
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { useSpring, animated } from "@react-spring/web";
 
 import { NightLight } from "./NightLight";
 

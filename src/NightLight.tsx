@@ -1,11 +1,220 @@
 import { animated, config, useSpring } from "@react-spring/web";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-// Import SVG images to ensure they're properly included in builds
-// Using relative URLs that will work with the base path configuration
-const bulbOffSvg = "./images/bulb-off.svg";
-const bulbOnSvg = "./images/bulb-on.svg";
-const handleSvg = "./images/handle.svg";
+// SVG Components instead of image references
+const BulbOffSVG = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 180">
+		<defs>
+			<radialGradient
+				id="bulbOffGradient"
+				cx="50%"
+				cy="50%"
+				r="50%"
+				fx="45%"
+				fy="40%"
+			>
+				<stop offset="0%" stopColor="#f8f8f8" />
+				<stop offset="60%" stopColor="#e0e0e0" />
+				<stop offset="100%" stopColor="#b0b0b0" />
+			</radialGradient>
+		</defs>
+		<circle
+			cx="75"
+			cy="72"
+			r="50"
+			fill="url(#bulbOffGradient)"
+			stroke="#ccc"
+			strokeWidth="1.5"
+		/>
+		<path
+			d="M62,0 L88,0 L88,22 L62,22 Z"
+			fill="#d0d0d0"
+			stroke="#bbb"
+			strokeWidth="1"
+		/>
+		<rect
+			x="65"
+			y="22"
+			width="20"
+			height="10"
+			fill="#d0d0d0"
+			stroke="#bbb"
+			strokeWidth="1"
+		/>
+		<rect
+			x="67"
+			y="32"
+			width="16"
+			height="10"
+			fill="#c0c0c0"
+			stroke="#bbb"
+			strokeWidth="1"
+		/>
+		<path
+			d="M67,40 Q75,48 83,40"
+			stroke="#888"
+			strokeWidth="2"
+			fill="none"
+		/>
+		<path
+			d="M55,92 Q70,107 95,102"
+			stroke="#888"
+			strokeWidth="1.5"
+			fill="none"
+		/>
+		<path
+			d="M90,52 Q100,57 95,67"
+			stroke="#d6d6d6"
+			strokeWidth="1.5"
+			fill="none"
+		/>
+	</svg>
+);
+
+const BulbOnSVG = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 180">
+		<defs>
+			<radialGradient
+				id="bulbOnGradient"
+				cx="0.5"
+				cy="0.5"
+				r="0.5"
+				fx="0.45"
+				fy="0.45"
+			>
+				<stop offset="0%" stopColor="#fffef0" />
+				<stop offset="50%" stopColor="#fff8d0" />
+				<stop offset="100%" stopColor="#ffeeaa" />
+			</radialGradient>
+		</defs>
+		<circle
+			cx="75"
+			cy="72"
+			r="50"
+			fill="url(#bulbOnGradient)"
+			stroke="#e5ca80"
+			strokeWidth="1"
+		/>
+		<path
+			d="M62,0 L88,0 L88,22 L62,22 Z"
+			fill="#d0d0d0"
+			stroke="#bbb"
+			strokeWidth="1"
+		/>
+		<rect
+			x="65"
+			y="22"
+			width="20"
+			height="10"
+			fill="#d0d0d0"
+			stroke="#bbb"
+			strokeWidth="1"
+		/>
+		<rect
+			x="67"
+			y="32"
+			width="16"
+			height="10"
+			fill="#c0c0c0"
+			stroke="#bbb"
+			strokeWidth="1"
+		/>
+		<path
+			d="M67,40 Q75,48 83,40"
+			stroke="#ffb84d"
+			strokeWidth="2"
+			fill="none"
+		/>
+		<path
+			d="M55,92 Q70,107 95,102"
+			stroke="#ca9"
+			strokeWidth="1.5"
+			fill="none"
+		/>
+		<path
+			d="M90,52 Q100,57 95,67"
+			stroke="#fff"
+			strokeWidth="2"
+			fill="none"
+			opacity="0.8"
+		/>
+		<line
+			x1="75"
+			y1="30"
+			x2="75"
+			y2="45"
+			stroke="rgba(255, 255, 200, 0.8)"
+			strokeWidth="1.5"
+		/>
+		<line
+			x1="100"
+			y1="47"
+			x2="85"
+			y2="47"
+			stroke="rgba(255, 255, 200, 0.8)"
+			strokeWidth="1.5"
+		/>
+		<line
+			x1="50"
+			y1="47"
+			x2="65"
+			y2="47"
+			stroke="rgba(255, 255, 200, 0.8)"
+			strokeWidth="1.5"
+		/>
+	</svg>
+);
+
+const HandleSVG = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 60">
+		<rect
+			x="7"
+			y="2"
+			width="20"
+			height="50"
+			rx="5"
+			ry="5"
+			fill="#888"
+			opacity="0.3"
+		/>
+		<rect
+			x="5"
+			y="0"
+			width="20"
+			height="50"
+			rx="5"
+			ry="5"
+			fill="#bbb"
+			stroke="#999"
+			strokeWidth="1"
+		/>
+		<rect
+			x="7"
+			y="5"
+			width="16"
+			height="40"
+			rx="3"
+			ry="3"
+			fill="#aaa"
+			stroke="#999"
+			strokeWidth="0.5"
+		/>
+		<rect x="10" y="10" width="10" height="30" rx="2" ry="2" fill="#999" />
+		<line x1="13" y1="15" x2="17" y2="15" stroke="#777" strokeWidth="1.5" />
+		<line x1="13" y1="20" x2="17" y2="20" stroke="#777" strokeWidth="1.5" />
+		<line x1="13" y1="25" x2="17" y2="25" stroke="#777" strokeWidth="1.5" />
+		<line x1="13" y1="30" x2="17" y2="30" stroke="#777" strokeWidth="1.5" />
+		<line
+			x1="9"
+			y1="10"
+			x2="9"
+			y2="40"
+			stroke="#ccc"
+			strokeWidth="0.75"
+			opacity="0.6"
+		/>
+	</svg>
+);
 
 export type Props = {
 	isOn?: boolean;
@@ -283,32 +492,30 @@ export const NightLight: React.FC<Props> = ({
 				}}
 			>
 				{/* Off Bulb */}
-				<animated.img
-					src={bulbOffSvg}
-					alt="Light bulb off"
+				<animated.div
 					style={{
 						...bulbOffSpring,
 						position: "absolute",
 						top: 0,
 						left: 0,
 						width: "100%",
-						filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
 					}}
-				/>
+				>
+					<BulbOffSVG />
+				</animated.div>
 
 				{/* On Bulb */}
-				<animated.img
-					src={bulbOnSvg}
-					alt="Light bulb on"
+				<animated.div
 					style={{
 						...bulbOnSpring,
 						position: "absolute",
 						top: 0,
 						left: 0,
 						width: "100%",
-						filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
 					}}
-				/>
+				>
+					<BulbOnSVG />
+				</animated.div>
 			</div>
 
 			{/* Pull wire and handle */}
@@ -386,15 +593,9 @@ export const NightLight: React.FC<Props> = ({
 							background: wireColor,
 						}}
 					/>
-					<img
-						src={handleSvg}
-						alt="Pull handle"
-						style={{
-							width: "100%",
-							pointerEvents: "none",
-							filter: "drop-shadow(0 2px 3px rgba(0,0,0,0.15))",
-						}}
-					/>
+					<div style={{ width: "100%", pointerEvents: "none" }}>
+						<HandleSVG />
+					</div>
 				</animated.div>
 			</div>
 		</animated.div>

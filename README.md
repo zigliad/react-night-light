@@ -20,6 +20,7 @@ A customizable night light component for React with an interactive pull-cord mec
 -   🌈 Customizable appearance (wire color, length, pull distance)
 -   🔄 Controlled and uncontrolled component modes
 -   📱 Mobile / touch device compatible
+-   📦 SVGs implemented as native React components (guaranteed to display correctly)
 
 ## Installation
 
@@ -38,17 +39,17 @@ import React, { useState } from "react";
 import { NightLight } from "react-night-light";
 
 const MyComponent = () => {
-  const [isLightOn, setIsLightOn] = useState(false);
+	const [isLightOn, setIsLightOn] = useState(false);
 
-  return (
-    <div>
-      <NightLight
-        isOn={isLightOn}
-        onToggle={(newState) => setIsLightOn(newState)}
-      />
-      <p>The light is currently {isLightOn ? "ON" : "OFF"}</p>
-    </div>
-  );
+	return (
+		<div>
+			<NightLight
+				isOn={isLightOn}
+				onToggle={(newState) => setIsLightOn(newState)}
+			/>
+			<p>The light is currently {isLightOn ? "ON" : "OFF"}</p>
+		</div>
+	);
 };
 ```
 
@@ -59,13 +60,13 @@ import React from "react";
 import { NightLight } from "react-night-light";
 
 const MyComponent = () => {
-  return (
-    <div>
-      <NightLight
-        onToggle={(state) => console.log("Light is now:", state)}
-      />
-    </div>
-  );
+	return (
+		<div>
+			<NightLight
+				onToggle={(state) => console.log("Light is now:", state)}
+			/>
+		</div>
+	);
 };
 ```
 
