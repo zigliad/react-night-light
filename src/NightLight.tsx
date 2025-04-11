@@ -221,24 +221,23 @@ export type Props = {
 	onToggle?: (state: boolean) => void;
 	wireColor?: string;
 	maxPullDistance?: number;
-	initialWireLength?: number; // New prop for initial wire length
-	className?: string; // Added className prop
+	initialWireLength?: number;
+	className?: string;
 	ref?: React.Ref<HTMLDivElement>; // React 19 allows ref as a direct prop
 };
 
 /**
  * NightLight - A React component that simulates a night light with pull-to-toggle functionality
  *
- * This component is compatible with React 19's direct ref system, where ref is passed as a prop.
- * In React 19, forwardRef becomes a legacy API as refs can be passed directly to function components.
+ * This component uses React 19's direct ref approach, where ref is passed as a prop.
  */
 export function NightLight({
 	isOn: controlledIsOn,
 	onToggle,
 	wireColor = "#888",
-	maxPullDistance = 90, // Maximum pull distance
-	initialWireLength = 30, // Default initial wire length
-	className = "", // Default className is empty string
+	maxPullDistance = 90,
+	initialWireLength = 30,
+	className = "",
 	ref, // React 19 allows ref as a direct prop
 }: Props) {
 	const [internalState, setInternalState] = useState(false);

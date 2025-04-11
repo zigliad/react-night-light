@@ -23,17 +23,11 @@ export default defineConfig(({ mode }) => {
 					formats: ["es", "umd"],
 				},
 				rollupOptions: {
-					external: [
-						"react",
-						"react-dom",
-						"framer-motion",
-						"@react-spring/web",
-					],
+					external: ["react", "react-dom", "@react-spring/web"],
 					output: {
 						globals: {
 							react: "React",
 							"react-dom": "ReactDOM",
-							"framer-motion": "FramerMotion",
 							"@react-spring/web": "ReactSpring",
 						},
 					},
