@@ -17,6 +17,7 @@ const App = () => {
 	});
 
 	return (
+		// @ts-ignore - React-spring has issues with children prop in TypeScript for React 19
 		<animated.div
 			style={{
 				position: "relative",
